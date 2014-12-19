@@ -7,7 +7,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-/* POLE FILE WITH POLE PARENT */
+/* WORKS WITH ANY SCE XML FILE */
 
 public class XML_to_JSON {
 
@@ -18,11 +18,15 @@ public class XML_to_JSON {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             final StringBuilder builder = new StringBuilder();
+            //title belongs to Parent: Pole = sce:Pole, Conductor = sce:Conductor, etc.
             final String title = "sce:Pole";
 
             DefaultHandler handler = new DefaultHandler()
             {
 
+                /*
+                To only call upon the elements that are referenced
+                 */
                 boolean mRID = false;
                 boolean aliasName = false;
                 boolean name = false;
@@ -70,6 +74,9 @@ public class XML_to_JSON {
 
                 public void startElement(String uri, String localName,String qName,
                                          Attributes attributes) throws SAXException {
+                    /*
+                    Ignore unneeded Header/Parent elements
+                     */
 
                     if(qName.equalsIgnoreCase("sce:PLPExtract") | (qName.equalsIgnoreCase("sce:Payload"))
                             | (qName.equalsIgnoreCase("sce:Header"))) {
@@ -258,8 +265,9 @@ public class XML_to_JSON {
 
                 public void endElement(String uri, String localName, String qName) throws SAXException {
 
-
-
+                    /*
+                    Ignore Header
+                     */
                     if (qName.equalsIgnoreCase("sce:Header")){
 
                         builder.setLength(0);
@@ -560,6 +568,9 @@ public class XML_to_JSON {
 
             };
 
+            /*
+            File located on my local machine
+             */
             saxParser.parse("C:\\Users\\bcervantes\\Desktop\\30\\District_30_Pole.xml", handler);
 
         } catch (Exception e) {
