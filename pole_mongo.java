@@ -32,8 +32,8 @@ public class pole_mongo {
             {
 
                 boolean mRID = false;
-                //boolean aliasName = false;
-                //boolean name = false;
+                boolean aliasName = false;
+                boolean name = false;
                 boolean grandFather = false;
                 boolean pType = false;
                 boolean value = false;
@@ -70,7 +70,7 @@ public class pole_mongo {
                     if (qName.equalsIgnoreCase("sce:mRID")) {
                         mRID = true;
                     }
-/*
+
                     if (qName.equalsIgnoreCase("sce:aliasName")) {
                         aliasName = true;
                     }
@@ -78,7 +78,7 @@ public class pole_mongo {
                     if (qName.equalsIgnoreCase("sce:name")) {
                         name = true;
                     }
-*/
+
                     if (qName.equalsIgnoreCase("sce:grandFatherFlag")) {
                         grandFather = true;
                     }
@@ -173,13 +173,6 @@ public class pole_mongo {
 
                     if (qName.equalsIgnoreCase("sce:Header")){
 
-                        //String xml = builder.toString();
-                        /*try {
-                            JSONObject jObj = XML.toJSONObject(xml);
-                            //System.out.println(jObj);
-                        } catch (org.json.JSONException e) {
-                            e.printStackTrace();
-                        }*/
                         builder.setLength(0);
                     }
 
@@ -189,7 +182,6 @@ public class pole_mongo {
 
                         try {
                             JSONObject jObj = XML.toJSONObject(xml);
-                            //System.out.println(jObj);
                             String json = String.valueOf(jObj);
                             DBObject dbObject = (DBObject) JSON.parse(json);
                             collection.insert(dbObject);
@@ -213,7 +205,7 @@ public class pole_mongo {
                         mRID = false;
                         all = "";
                     }
-/*
+
                     if (aliasName) {
                         builder.append(all);
                         aliasName = false;
@@ -226,7 +218,7 @@ public class pole_mongo {
                         all = "";
 
                     }
-*/
+
                     if (grandFather) {
                         builder.append(all);
                         grandFather = false;
