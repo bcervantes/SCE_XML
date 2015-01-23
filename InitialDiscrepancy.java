@@ -17,8 +17,6 @@ public class InitialDiscrepancy {
             String title = "sce:Pole";
             int i = 0;
 
-            System.out.println("Known issues\n**************************");
-
             i = 0;
             BasicDBObject whereQuery = new BasicDBObject();
             BasicDBObject existsQuery = new BasicDBObject();
@@ -91,8 +89,6 @@ public class InitialDiscrepancy {
             }
             System.out.println("Missing Lat/Long: " + i);
 
-            System.out.println("\nDataset summary\n**********************");
-
             i = 0;
             cursor = collection.find();
             while (cursor.hasNext()){
@@ -109,6 +105,7 @@ public class InitialDiscrepancy {
                 cursor.next();
                 ++i;
             }
+
             System.out.println("Excluded: " + i);
 
             i = 0;
